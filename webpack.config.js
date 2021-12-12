@@ -1,14 +1,13 @@
 const path = require('path');
 const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const envFile = require('node-env-file');
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 if (process.env.NODE_ENV === 'test') {
-  envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV.trim() + '.env'));
+  require('dotenv').config({ path: '.env.test' });
 } else if (process.env.NODE_ENV === 'development') {
-  envFile(path.join(__dirname, 'config/' + process.env.NODE_ENV.trim() + '.env'));
+  require('dotenv').config({ path: '.env.development' });
 }
 
 module.exports = (env) => {
